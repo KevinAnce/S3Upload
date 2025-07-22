@@ -1,0 +1,49 @@
+{% load i18n %}
+{% if messages %}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Assume notyf is already defined globally (from your provided JS)
+      const notyf = window.notyf || new Notyf({
+        duration: 4000,
+        position: { x: 'right', y: 'top' },
+        types: [
+          {
+            type: 'info',
+            background: 'var(--color-info)',
+            icon: { className: 'icon-[tabler--info-circle] !text-info !w-[1rem]', tagName: 'i' },
+            color: 'white'
+          },
+          {
+            type: 'warning',
+            background: 'var(--color-warning)',
+            icon: { className: 'icon-[tabler--alert-triangle] !text-warning !w-[1rem]', tagName: 'i' },
+            color: 'white'
+          }
+        ]
+      });
+
+      const messages = [
+        {% for message in messages %}
+          {
+            text: `{{ message|safe }}`,
+            level: `{{ message.level_tag|default:'info' }}`
+          },
+        {% endfor %}
+      ];
+
+      messages.forEach((message, index) => {
+        // Map Django's 'error' level to Notyf's 'error'
+        const notyfType = message.level;
+        setTimeout(() => {
+          notyf.open({
+            type: notyfType,
+            message: message.text,
+            duration: 4000,
+            ripple: true,
+            position: { x: 'right', y: 'top' }
+          });
+        }, index * 1000);
+      });
+    });
+  </script>
+{% endif %}

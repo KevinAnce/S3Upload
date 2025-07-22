@@ -1,0 +1,31 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+<!DOCTYPE html>
+<html lang="{{ request.LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% translate 'HooYia: Your Trusted IT Partner in Cameroon' %} |
+        {% block title %}{% translate 'Home' %}{% endblock title %}</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/icon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/icon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/icon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/icon/site.webmanifest' %}">
+    <link rel="stylesheet" href="{% static 'notyf/notyf.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    {% block css %}{% endblock %}
+</head>
+
+<body class="flex flex-col min-h-screen">
+{% include "includes/_preloader.html" %}
+
+<main class="flex-grow m-20">
+    {% block content %}{% endblock content %}
+</main>
+
+{% include "includes/_js.html" %}
+
+{% block js %}{% endblock %}
+</body>
+</html>

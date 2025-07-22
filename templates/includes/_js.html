@@ -1,0 +1,23 @@
+{% load static %}
+
+<script src="{% url 'javascript-catalog' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+<!-- Notyf -->
+<script src="{% static 'notyf/notyf.min.js' %}"></script>
+
+<!-- Toast Message -->
+{% include 'includes/_toast_message.html' %}
+
+
+<!-- Loader -->
+<script>
+  window.addEventListener('load', function () {
+    const loader = document.getElementById('loader');
+    if (loader) {
+      loader.classList.add('opacity-0');
+      loader.style.display = 'none';
+    }
+  });
+</script>
+
